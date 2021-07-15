@@ -198,7 +198,9 @@ func (r *httpRequest) createHTTPRequest(endpoint url.URL) (*http.Request, error)
 
 	if body != nil {
 		req.Header.Set("Content-Length", strconv.Itoa(len(body)))
-		req.Header.Set("Content-Type", r.bodyBuilder.GetContentType())
+		if req.Header != nil {
+			req.Header.Set("Content-Type", r.bodyBuilder.GetContentType())
+		}
 	}
 	return req, nil
 }
